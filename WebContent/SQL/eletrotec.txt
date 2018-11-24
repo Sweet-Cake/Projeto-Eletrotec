@@ -1,0 +1,46 @@
+create database Eletrotec
+go
+use Eletrotec
+
+create table cliente(
+nome varchar(30) not null,
+cpf varchar(11) not null primary key,
+telefoneResidencia varchar(8),
+telefoneCelular varchar(9),
+endereco varchar(50),
+bairro varchar(20),
+cidade varchar(20),
+estado varchar(20)
+)
+
+create table ordemservico(
+id int not null primary key,
+cpfCliente varchar(11) not null foreign key references cliente(cpf),
+dataInicio date not null,
+dataFim date,
+estadoOS varchar(10),
+valor decimal (5,2)
+)
+
+
+create table eletronico(
+aparelho varchar(30) not null,
+modelo varchar(15) not null primary key
+)
+
+
+create table eletronicos_os(
+numOS int not null foreign key references ordemservico(id),
+modelo varchar(15) not null foreign key references eletronico(modelo),
+tipo varchar(10) not null,
+aparelho varchar(30),
+acessorio varchar(100),
+observacao varchar(100),
+primary key (numOS, modelo)
+)
+
+create table eletronicos_defasados(
+modelo varchar(15) not null foreign key references eletronico(modelo),
+razao varchar(50) not null,
+primary key (modelo)
+)

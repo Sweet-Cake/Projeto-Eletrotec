@@ -1,0 +1,52 @@
+create procedure sp_adicionaCliente(@nome varchar(30), @cpf varchar(11), @telefoneResidencia varchar(11),@telefoneCelular varchar(11),
+									@endereco varchar(50), @bairro varchar(20), @cidade varchar(20), @estado varchar(20))
+as
+	if (@telefoneCelular is null and @telefoneResidencia is null)
+	begin
+		raiserror('Erro: É necessário inserir pelo menos um telefone de contato', 16, 16)
+	end
+	else
+	begin
+		insert into cliente(nome, cpf, telefoneResidencia, telefoneCelular, endereco, bairro, cidade,estado) values 
+		(@nome, @cpf, @telefoneResidencia, @telefoneCelular, @endereco, @bairro, @cidade, @estado)
+	end
+
+	exec sp_adicionaCliente 'merry','5637', '753666', '465040', 'Rua Paru, 155', 'Vila Mazzei', 'São Paulo', 'SP'
+----------------------------------------------------------
+
+create procedure sp_adicionaOS(@id int, @cpfCliente varchar(11))
+as
+	declare @dataInicio date
+	set @dataInicio = GETDATE()
+	insert into ordemservico (id, cpfCliente, dataInicio, estadoOS) values
+				(@id, @cpfCliente, @dataInicio, 'Aberto')
+
+------------------------------------------------------------
+create procedure sp_adicionarEletronicos(@numOS int, @modelo varchar(15), @tipo varchar(10), @aparelho varchar(30), 
+										 @acessorio varchar(50), @observacao varchar(100))
+as
+	declare @eletronico int
+	set @eletronico = (select count(modelo) from eletronico where modelo = @modelo)
+	if (@eletronico = 0)
+	begin
+		insert into eletronico values (@aparelho, @modelo)
+	end
+	insert into eletronicos_os(numOS, modelo, tipo, acessorio, observacao) values
+	(@numOS, @modelo, @tipo, @acessorio, @observacao)
+
+	exec sp_adicionarEletronicos 1, 'AWD290', 'TV de Plasma', 'TV Panasonic 50"', null, 'Som Baixo'
+
+------------------------------------------------------------------
+CREATE PROCEDURE sp_adicionardefasado(@modelo varchar(15), @razao varchar(50))
+as
+if ((select count(modelo) from eletronico where modelo = @modelo) = 0)
+begin
+	raiserror('ERRO: Eletronico não encontrado no Banco de Dados', 16, 16)
+end
+else
+begin
+	insert into eletronicos_defasados values (@modelo, @razao)
+end
+
+exec sp_adicionardefasado 'BAD666', 'Preço de conserto extrapola orçamento'
+--------------------------------------------------

@@ -1,0 +1,21 @@
+insert into ordemservico (id, cpfCliente, dataInicio, estadoOS) values
+				(@id, @cpfCliente, @dataInicio, 'Aberto')
+
+	update ordemservico
+	set valor = 150, dataFim = '2018-11-30' 
+	where cpfCliente = '49612895821' and id = 1
+
+	delete cliente where cpf = '5637'
+----
+
+--verificar modelo defasado
+create alter procedure sp_verifdefasado(@modelo varchar(15))
+as
+if ((select count(@modelo) from eletronicos_defasados where modelo = @modelo) != 0)
+begin
+	declare @razao varchar(30)
+	set @razao = (select razao from eletronicos_defasados where modelo = @modelo)
+	raiserror('Modelo %s não tem conserto. Razão : %s',16, 16, @modelo, @razao)
+end
+
+exec sp_verifdefasado 'AWD290'
