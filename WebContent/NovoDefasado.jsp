@@ -9,6 +9,13 @@
 	type="text/javascript"></script>
 <script src="script.js"></script>
 <title>ELETROTEC - Inserir eletrônico defasado</title>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#Pesquisar').click(function(){
+					alert('Pesquisar');
+				});
+			});
+		</script>
 </head>
 <body>
 	<div id='cssmenu'>
@@ -23,8 +30,17 @@
 			<li><a href='VerDefasados.jsp'>Ver Defasados</a></li>
 		</ul>
 	</div>
+
 	<div class="container">
-	<h2>Inserir Eletrônico Defasado</h2>
+		<h2>Adicionar Eletrônico Defasado</h2>
+		<br>
+		<form method="POST" action="./ControleDefasados">
+			<label>Modelo</label> <input class="input" type="text" name="modelo"
+				id="Modelo" /> <input class="botao" id="Pesquisar" type="button"
+				value="Pesquisar" name="cmd" /> <br> <label>Razão</label> 
+				<input class="input" type="text" name="razao" id="Razao" /> <br> 
+				<input type="submit" value="Enviar">
+		</form>
 	</div>
 </body>
 </html>

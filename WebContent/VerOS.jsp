@@ -24,7 +24,7 @@
 		</ul>
 	</div>
 	<div class="container">
-	<h2>Ver OS</h2>
+	<h2 class='titulo'>Ver OS</h2>
 	</div>
 </body>
 </html>
