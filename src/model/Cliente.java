@@ -3,7 +3,7 @@ package model;
 public class Cliente {
 
 	private String nome;
-	private int CPF;
+	private String CPF;
 	private String telefoneResidencia;
 	private String telefoneCelular;
 	private String endereco;
@@ -19,12 +19,12 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public int getCPF() {
+	public String getCPF() {
 		return CPF;
 	}
 
-	public void setCPF(int cPF) {
-		CPF = cPF;
+	public void setCPF(String string) {
+		CPF = string;
 	}
 
 	public String getTelefoneResidencia() {
