@@ -8,7 +8,8 @@ public class OrdemdeServico {
 	private Date data_inicio;
 	private Date data_fim;
 	private double valor;
-	private int numero;
+	private String cpf;
+	private String estadoOS;
 
 	public void setNumeroOS(int numeroOS) {
 		this.numeroOS = numeroOS;
@@ -42,12 +43,21 @@ public class OrdemdeServico {
 		this.valor = valor;
 	}
 
-	public int getNumero() {
-		return numero;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setNumero(int numero) {
-		this.numero = numero;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
+	public String getEstadoOS() {
+		return estadoOS;
+	}
+
+	public void setEstadoOS(String estadoOS) {
+		this.estadoOS = estadoOS;
+	}
+
+	
 }

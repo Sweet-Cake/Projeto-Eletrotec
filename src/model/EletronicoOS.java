@@ -5,8 +5,10 @@ public class EletronicoOS {
 	private int OS;
 	private String modelo_eletronico;
 	private String acessorio;
-	private int observacao;
-
+	private String observacao;
+	private String tipo;
+	private String aparelho;
+	
 	public int getOS() {
 		return OS;
 	}
@@ -31,12 +33,28 @@ public class EletronicoOS {
 		this.acessorio = acessorio;
 	}
 
-	public int getObservacao() {
+	public String getObservacao() {
 		return observacao;
 	}
 
-	public void setObservacao(int observacao) {
-		this.observacao = observacao;
+	public void setObservacao(String string) {
+		this.observacao = string;
 	}
 
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getAparelho() {
+		return aparelho;
+	}
+
+	public void setAparelho(String aparelho) {
+		this.aparelho = aparelho;
+	}
+	
 }
