@@ -12,16 +12,33 @@
 <script>
 	$(document).ready(function(){
 		$('#adicionar').click(function(){
+			var numos=$('#numos').val();
 			var aparelho=$('#aparelho').val();
 			var modelo=$('#modelo').val();
 			var tipo=$('#tipo').select().val();
 			var obs=$('#obs').val();
 			var acessorio=$('#acessorio').val();
-			alert(tipo);
+			var cmd= 'adicionar';
 			$('#tabela').append('<tr><th>'+aparelho+'</th><th>'+modelo+
 					'</th><th>'+tipo+'</th><th>'+obs+'</th><th>'+acessorio+
-					'</th> <th><input class="botao" id="excluir" type="button" value="Excluir" onclick="deletar()"/></th></tr>');
+					'</th> <th><input class="botao" id="excluir" type="button" value="Excluir" onclick="deletar(this)"/></th></tr>');
+			
+			$.ajax({
+				type: 'POST',
+				data:{numos: numos, 
+					aparelho: aparelho,
+					modelo: modelo,
+					tipo: tipo,
+					obs: obs,
+					acessorio: acessorio,
+					cmd: cmd},
+				url: 'ControleOS',
+				success:function(result){
+					alert('foi');
+				}
+			});
 		});	
+		
 	});
 </script>
 </head>
@@ -42,7 +59,7 @@
 	<h2>Criar OS</h2>
 	<form method="POST" action="./ControleOS">
 	<label>OS</label>
-	<input class="input" type="text" name="nos" id="nos"/>
+	<input class="input" type="text" name="numos" id="numos"/>
 	<input class="botao" id="PesquisarOS" type="button" value="Pesquisar" name="cmd" />
 	<label>CPF</label>
 	<input class="input" type="text" name="cpf" id="cpf"/>
@@ -70,7 +87,7 @@
 	<input class="input" type="text" name="acessorio" id="acessorio"/>  
 	<br>
 	<input class="botao" id="adicionar" type="button" value="Adicionar Eletrônico" name="adicionar" /><br><br>
-	<table style="width:100%" id="tabela"'>
+	<table style="width:100%" id="tabela">
 	  <tr>
 	    <th>Aparelho</th>
 	    <th>Modelo</th> 
@@ -81,7 +98,7 @@
 	  </tr>
 	</table>
 	<br>
-	<input type="submit" value="Enviar" id="Enviar">
+	<input type="submit" value="Enviar" name="cmd" id="Enviar">
 	</form>
 	<script>
 	function deletar(coluna){
